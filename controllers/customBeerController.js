@@ -1,4 +1,4 @@
-import { customBeer } from "../models/customBeerModel.js"
+import { CustomBeer } from "../models/customBeerModel.js"
 
 const customBeer = [ 
     {
@@ -14,7 +14,21 @@ const customBeer = [
 ];
 
 export const getCustomBeer = (req, res) => {
-    res.status(200).send({
-        customBeer: customBeer || `No Beer Found`
-    })
+    CustomBeer.findAll()
+    .then(beers => {
+        res.status(200).send(beers)})
+        .catch(err => {
+            console.log(err)
+        })
 }
+
+export const getCustomBeerByID = (req, res) => {
+    const id = parseInt(req.params.id);
+    CustomBeer.findByPk(id)
+    .then(beer => {
+        res.status(200).send(beer || `Beer with the id of ${id} not found`)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+};

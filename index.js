@@ -2,10 +2,19 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import router from "./routes/customBeer.js"
 import cors from 'cors';
+import { sequelize } from "./db/index.js"
 
 const app = express();
 
 const port = process.env.PORT || 3020;
+
+sequelize.sync()
+.then((result => {
+  console.log(result)
+}))
+.catch(err => {
+  console.log(err)
+})
 
 app.use(cors({
   origin: 'http://localhost:3000'

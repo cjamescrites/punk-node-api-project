@@ -32,3 +32,57 @@ export const getCustomBeerByID = (req, res) => {
         console.log(err)
     })
 };
+
+export const addCustomBeer = (req, res) => {
+    CustomBeer.create({
+        name: req.body.name,
+        tagline: req.body.tagline,
+        first_brewed: req.body.first_brewed,
+        description: req.body.description,
+        image_url: req.body.image_url,
+        abv: req.body.abv,
+        ph: req.body.ph
+    })
+    .then(() => {
+        res.status(201).send({message: "Custom Beer Added!"})
+    })
+    .catch(err => {
+        console.log(err)
+    }) 
+};
+
+export const deleteCustomBeer = (req, res) => {
+    const id = parseInt(req.params.id)
+    CustomBeer.destroy({where: 
+        {
+            id: id
+        },
+        force: true
+    })
+    .then(() => {
+        res.status(201).send({message: "Custom Beer Deleted"})
+    })
+    .catch(err => {
+        console.log(err)
+    })
+};
+
+export const updateCustomBeerByID = (req, res) => {
+    const id = parseInt(req.params.id)
+    CustomBeer.upsert({
+        id: id,
+        name: req.body.name,
+        tagline: req.body.tagline,
+        first_brewed: req.body.first_brewed,
+        description: req.body.description,
+        image_url: req.body.image_url,
+        abv: req.body.abv,
+        ph: req.body.ph
+    })
+    .then(() => {
+        res.status(201).send({message: "Custom Beer Updated!"})
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}

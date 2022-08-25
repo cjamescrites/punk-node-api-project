@@ -31,7 +31,7 @@ export const CustomBeer = sequelize.define("custom_beers", {
 
     image_url: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
 
     abv : {
@@ -44,3 +44,4 @@ export const CustomBeer = sequelize.define("custom_beers", {
         allowNull: false
     }
 })
+

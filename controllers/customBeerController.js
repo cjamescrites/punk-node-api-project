@@ -1,3 +1,5 @@
+import { customBeer } from "../models/customBeerModel.js"
+
 const customBeer = [ 
     {
     id: 1994,
